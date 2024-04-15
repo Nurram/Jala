@@ -18,7 +18,7 @@ class ShrimpDiseasesController extends GetxController {
   final diseaseProgress = 0.obs;
 
   fetchDiseases({required bool isPaginated}) async {
-    if (isLastPage) return;
+    if (isLastPage && isPaginated) return;
     setLoading(isPaginated: isPaginated, isLoading: true);
 
     try {

@@ -16,7 +16,7 @@ class ShrimpNewsController extends GetxController {
   final newsProgress = 0.obs;
 
   fetchNews({required bool isPaginated}) async {
-    if (isLastPage) return;
+    if (isLastPage && isPaginated) return;
     setLoading(isPaginated: isPaginated, isLoading: true);
 
     try {
@@ -30,6 +30,11 @@ class ShrimpNewsController extends GetxController {
       }
 
       currentPage(currentPage.value + 1);
+
+      if (currentPage.value > newsResponse.value!.meta!.lastPage!) {
+        isLastPage = true;
+      }
+
       setLoading(isPaginated: isPaginated, isLoading: false);
     } catch (e) {
       setLoading(isPaginated: isPaginated, isLoading: false);
